@@ -1,9 +1,15 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace LibrarySystem.Models;
 
 public class RegisterViewModel
 {
+    [PersonalData]
+    public string FirstName { get; set; }
+    [PersonalData]
+    public string LastName { get; set; }
+
     [Required]
     [EmailAddress]
     public string Email { get; set; }

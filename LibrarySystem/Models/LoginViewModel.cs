@@ -4,7 +4,7 @@ namespace LibrarySystem.Models;
 
 public class LoginViewModel
 {
-    [Required]
+[Required]
 [EmailAddress]
 public string Email { get; set; }
 [Required]
