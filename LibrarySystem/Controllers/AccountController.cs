@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using LibrarySystem.Models;
 using Microsoft.AspNetCore.Identity;
 using LibrarySystem.Context;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibrarySystem.Controllers;
 
@@ -55,5 +56,37 @@ public IActionResult Register()
 
         }
         return View(model);
+    }
+
+    [HttpGet]
+    [AllowAnonymous]
+    public IActionResult Login()
+    {
+        return View();
+    }
+    [HttpPost]
+    [AllowAnonymous]
+    public async Task<IActionResult> Login(LoginViewModel user)
+    {
+        if (ModelState.IsValid)
+        {
+            var result = await _signInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe, false);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
+
+        }
+        return View(user);
+    } 
+
+    public async Task<IActionResult> Logout()
+    {
+        await _signInManager.SignOutAsync();
+
+        return RedirectToAction("Login");
     }
 }
