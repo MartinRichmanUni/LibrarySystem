@@ -1,0 +1,30 @@
+@model IEnumerable<LibrarySystem.Models.Book>
+
+@{
+    ViewData["Title"] = "Book Page";
+}
+
+<table class="table">
+    <tr>
+        <th> Book ID </th>
+        <th> Book Title </th>
+        <th> Genre </th>
+        <th> Author </th>
+        <th> Borrowed? </th>
+    </tr>
+    
+       @foreach (Book book in Model)
+        {
+            <tr>
+                <td>@book.BookID</td>
+                <td>@book.BookTitle</td>
+                <td>@book.Genre</td>
+                <td>@book.Author</td>
+                <td>@book.Borrowed</td>
+                <td>
+                    <a asp-action="DeleteBook" asp-route-id="@book.BookID"> Delete </a>
+                </td>
+            </tr>
+        } 
+</table>
+<a asp-area="" asp-controller="Book" asp-action="AddBook">Add New Book</a>

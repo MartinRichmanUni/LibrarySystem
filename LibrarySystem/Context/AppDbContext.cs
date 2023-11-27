@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using LibrarySystem.Models;
 
 namespace LibrarySystem.Context
 {
@@ -19,6 +20,6 @@ namespace LibrarySystem.Context
         }
 
         // List of DB tables for use
-        
+        public DbSet<Book> Books { get; set; }
     }
 }

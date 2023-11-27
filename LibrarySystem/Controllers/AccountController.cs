@@ -19,12 +19,13 @@ public AccountController(UserManager<ApplicationUser> userManager,
             _signInManager = signInManager;
     }
 
+
+    // Code tutorial used : https://www.freecodespot.com/blog/asp-net-core-identity/
 public IActionResult Register()
     {
         return View();
     }
 
-    // User Account Registration
     [HttpPost]
     public async Task<IActionResult> Register(RegisterViewModel model)
     {

@@ -1,0 +1,25 @@
+@model LibrarySystem.Models.Book
+
+@{
+    ViewData["Title"] = "Add New Book";
+}
+
+<form method="post" asp-controller="Book" asp-action="NewBook">
+    <div>
+        <label asp-for="BookTitle"></label> <br />
+        <input asp-for="BookTitle" />
+    </div>
+    <div>
+        <label asp-for="Genre"></label> <br />
+        <input asp-for="Genre" />
+    </div>
+    <div>
+        <label asp-for="Author"></label> <br />
+        <input asp-for="Author" />
+    </div>
+    <div>
+        <label type="checkbox" asp-for="Borrowed"></label> <br />
+        <input type="checkbox" asp-for="Borrowed" />
+    </div>
+    <button type="submit"> Add New Book </button>
+</form>
