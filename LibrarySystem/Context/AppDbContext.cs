@@ -21,5 +21,7 @@ namespace LibrarySystem.Context
 
         // List of DB tables for use
         public DbSet<Book> Books { get; set; }
+
+        public DbSet<Borrowed> Borrowed { get; set; }
     }
 }

@@ -19,7 +19,6 @@ public AccountController(UserManager<ApplicationUser> userManager,
             _signInManager = signInManager;
     }
 
-
     // Code tutorial used : https://www.freecodespot.com/blog/asp-net-core-identity/
 public IActionResult Register()
     {

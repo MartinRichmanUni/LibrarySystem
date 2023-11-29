@@ -1,0 +1,28 @@
+@model IEnumerable<LibrarySystem.Models.UserBooks>
+
+@{
+    ViewData["Title"] = "User Book Page";
+}
+
+<table class="table">
+    <tr>
+        <th> Book Title </th>
+        <th> Genre </th>
+        <th> Author </th>
+        <th> Borrowed Date </th>
+        <th> Due Date</th>
+        <th> Returned Date </th>
+    </tr>
+    
+       @foreach (UserBooks borrowed in Model)
+        {
+            <tr>
+                <td>@borrowed.BookTitle</td>
+                <td>@borrowed.Genre</td>
+                <td>@borrowed.Author</td>
+                <td>@borrowed.BorrowedDate</td>
+                <td>@borrowed.DueDate</td>
+                <td>@borrowed.ReturnedDate</td>
+            </tr>
+        } 
+</table>
