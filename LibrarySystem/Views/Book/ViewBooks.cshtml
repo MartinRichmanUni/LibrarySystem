@@ -1,26 +1,33 @@
-@model IEnumerable<LibrarySystem.Models.Book>
+@model LibrarySystem.Models.BookGenreViewModel
 
 @{
     ViewData["Title"] = "Book Page";
 }
+<form asp-controller="Book" asp-action="ViewBooks" method="get">
+    <p>
+        <select asp-for="BookGenre" asp-items="Model.Genres">
+            <option value="">All</option>
+        </select>
 
+        Title: <input type="text" name="SearchResult" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
 <table class="table">
     <tr>
-        <th> Book ID </th>
-        <th> Book Title </th>
-        <th> Genre </th>
-        <th> Author </th>
-        <th> Borrowed? </th>
+        <th>@Html.DisplayNameFor(model => model.Books![0].BookID) </th>
+        <th> @Html.DisplayNameFor(model => model.Books![0].BookTitle) </th>
+        <th> @Html.DisplayNameFor(model => model.Books![0].Genre)</th>
+        <th> @Html.DisplayNameFor(model => model.Books![0].Author) </th>
     </tr>
     
-       @foreach (Book book in Model)
+       @foreach (var book in Model.Books!)
         {
             <tr>
                 <td>@book.BookID</td>
                 <td>@book.BookTitle</td>
                 <td>@book.Genre</td>
                 <td>@book.Author</td>
-                <td>@book.Borrowed</td>
                 <td>
                     <a asp-action="DeleteBook" asp-route-id="@book.BookID"> Delete </a>
                 </td>

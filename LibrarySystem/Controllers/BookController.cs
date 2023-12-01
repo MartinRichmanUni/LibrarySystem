@@ -4,6 +4,7 @@ using LibrarySystem.Context;
 using LibrarySystem.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LibrarySystem.Controllers;
 
@@ -17,19 +18,46 @@ public class BookController : Controller
         _context = context;
     }
 
-    // GET: All books
-    public async Task<IActionResult> ViewBooks()
+    // Either returns all books or based on search results
+    // Using https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/search?view=aspnetcore-8.0 as a tutorial
+    public async Task<IActionResult> ViewBooks(string bookGenre, string searchResult)
     {
-        var _Book = await _context.Books.ToListAsync();
-        return View(_Book);
+        if (_context.Books == null)
+        {
+            return Problem("No Books are within the system");
+        }
+
+        // List of Genres
+        IQueryable<string> genreQuery = from b in _context.Books
+                                    orderby b.Genre
+                                    select b.Genre;
+
+        var books = from b in _context.Books
+                    select b;
+
+        if (!String.IsNullOrEmpty(searchResult))
+        {
+            books = books.Where(m => m.BookTitle!.Contains(searchResult));
+        }
+
+        if (!String.IsNullOrEmpty(bookGenre))
+        {
+            books = books.Where(g => g.Genre == bookGenre);
+        }
+
+        var bookGenreView = new BookGenreViewModel
+        {
+            Genres = new SelectList(await genreQuery.Distinct().ToListAsync()),
+            Books = await books.ToListAsync()
+        };
+
+        return View(bookGenreView);
     }
 
     // Gets a list of books users has borrowed
     public async Task<IActionResult> UserBooks()
     {
         var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        // var userBooks = _context.Borrowed.Where(u => u.MemberID == user).ToList();
 
         // More information on Left Join using LINQ found at https://stackoverflow.com/questions/3404975/left-outer-join-in-linq
         var userBooks = from Book in _context.Books 
