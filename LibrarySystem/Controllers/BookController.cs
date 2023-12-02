@@ -83,6 +83,15 @@ public class BookController : Controller
         return View();
     }
 
+    public IActionResult BorrowBook(int id)
+    {
+        var book = (from b in _context.Books
+                    where b.BookID == id
+                    select b).FirstOrDefault();
+
+        return View(book);
+    }
+
     public async Task<IActionResult> DeleteBook(int? id)
     {
          if (id == null)

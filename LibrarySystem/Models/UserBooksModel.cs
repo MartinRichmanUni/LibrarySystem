@@ -2,6 +2,7 @@ namespace LibrarySystem.Models
 {
     public class UserBooks
     {
+        public int BookID { get; set; }
         public string BookTitle { get; set; }
 
         public string Genre { get; set; }
@@ -12,7 +13,7 @@ namespace LibrarySystem.Models
 
         public DateTime DueDate { get; set; }
 
-        public DateTime ReturnedDate { get; set; }
+        public DateTime? ReturnedDate { get; set; }
         
     }
 }

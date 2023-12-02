@@ -1,0 +1,25 @@
+@model LibrarySystem.Models.Book
+
+@{
+    ViewData["Title"] = "Borrow Book Page";
+}
+
+
+    <div>
+        <p> @Html.DisplayNameFor(Model => Model.BookTitle)</p>
+        <p>@Html.DisplayFor(Model => Model.BookTitle)</p>
+    </div>
+    <div>
+        <p> @Html.DisplayNameFor(Model => Model.Genre)</p>
+        <p>@Html.DisplayFor(Model => Model.Genre)</p>
+    </div>
+    <div>
+        <p> @Html.DisplayNameFor(Model => Model.Author)</p>
+        <p>@Html.DisplayFor(Model => Model.Author)</p>
+    </div>
+<form>
+Current Date: @DateTime.Now.ToString("yyyy-MM-dd")
+</form>
+
+
+

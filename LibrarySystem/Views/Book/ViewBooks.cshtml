@@ -24,13 +24,16 @@
        @foreach (var book in Model.Books!)
         {
             <tr>
+                <button disabled> Disable
+                </button>
                 <td>@book.BookID</td>
                 <td>@book.BookTitle</td>
                 <td>@book.Genre</td>
                 <td>@book.Author</td>
                 <td>
-                    <a asp-action="DeleteBook" asp-route-id="@book.BookID"> Delete </a>
+                    <a asp-action="BorrowBook" asp-route-id="@book.BookID"> Borrow Book </a>
                 </td>
+                
             </tr>
         } 
 </table>
