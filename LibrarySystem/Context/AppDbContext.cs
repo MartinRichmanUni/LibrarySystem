@@ -23,5 +23,7 @@ namespace LibrarySystem.Context
         public DbSet<Book> Books { get; set; }
 
         public DbSet<Borrowed> Borrowed { get; set; }
+
+        
     }
 }

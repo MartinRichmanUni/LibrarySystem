@@ -1,4 +1,4 @@
-@model LibrarySystem.Models.Book
+@model LibrarySystem.Models.UserBooks
 
 @{
     ViewData["Title"] = "Borrow Book Page";
@@ -7,18 +7,33 @@
 
     <div>
         <p> @Html.DisplayNameFor(Model => Model.BookTitle)</p>
-        <p>@Html.DisplayFor(Model => Model.BookTitle)</p>
+        <p> @Html.DisplayFor(Model => Model.BookTitle)</p>
     </div>
     <div>
         <p> @Html.DisplayNameFor(Model => Model.Genre)</p>
-        <p>@Html.DisplayFor(Model => Model.Genre)</p>
+        <p> @Html.DisplayFor(Model => Model.Genre)</p>
     </div>
     <div>
         <p> @Html.DisplayNameFor(Model => Model.Author)</p>
-        <p>@Html.DisplayFor(Model => Model.Author)</p>
+        <p> @Html.DisplayFor(Model => Model.Author)</p>
     </div>
-<form>
-Current Date: @DateTime.Now.ToString("yyyy-MM-dd")
+<form method="post" asp-controller="Book" asp-action="BorrowBook">
+    <div>
+        <p> @Html.DisplayNameFor(Model => Model.BorrowedDate)</p>
+        <p> @Html.DisplayFor(Model => Model.BorrowedDate)</p>
+    </div>
+    <div>
+        <p> @Html.DisplayNameFor(Model => Model.DueDate)</p>
+        <p> @Html.DisplayFor(Model => Model.DueDate)</p>
+    </div>
+    <p> Please note: You can only select an estimated delivery date within 3 weeks of the current date </p>
+    <input type="datetime-local" asp-for="BorrowedDate" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-ddThh:mm")" max="@DateTime.Now.AddDays(21).ToString("yyyy-MM-ddThh:mm")" id="BorrowedDate"/>
+    <p> Regular timeframe for borrowing a book is 2 weeks from the date of delivery. Extensions can be organised by getting into contact with customer support. Any books not returned before their due date are subject to fees </p>
+    
+    <input type="hidden" asp-for="DueDate" value="@Model.BorrowedDate.AddDays(14)"/>
+    <input type="hidden" asp-for="BookID"/>
+    <input type="hidden" asp-for="MemberID"/>
+    <button type="submit"> Add New Book </button>
 </form>
 
 

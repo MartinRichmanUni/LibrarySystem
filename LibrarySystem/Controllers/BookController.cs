@@ -85,12 +85,34 @@ public class BookController : Controller
 
     public IActionResult BorrowBook(int id)
     {
+        var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
         var book = (from b in _context.Books
                     where b.BookID == id
-                    select b).FirstOrDefault();
+                    select new UserBooks
+                    {
+                        BookID = b.BookID,
+                        BookTitle = b.BookTitle,
+                        Genre = b.Genre,
+                        Author = b.Author,
+                        MemberID = user
+                    }
+                    
+                    ).FirstOrDefault();
 
         return View(book);
     }
+
+    // Look at ways to set DueDate to user's chosen date + 14 days
+    // ReturnedDate is not bound but still returns the date as "01/01/0001" within the database
+    [HttpPost]
+    public IActionResult BorrowBook([Bind("BorrowedDate, DueDate, MemberID, BookID")] Borrowed uBook)
+    {
+        _context.Borrowed.Add(uBook);
+        _context.SaveChanges();
+        return RedirectToAction("ViewBooks");
+    }
+    
 
     public async Task<IActionResult> DeleteBook(int? id)
     {
@@ -115,7 +137,7 @@ public class BookController : Controller
     {
         _context.Books.Add(book);
         _context.SaveChanges();
-        ViewBag.Message = "Data Insert Successfully";  
+        ViewBag.Message = "Book Added Successfully";  
         return RedirectToAction("ViewBooks");
     }
 }

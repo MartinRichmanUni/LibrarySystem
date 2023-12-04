@@ -4,11 +4,11 @@ namespace LibrarySystem.Models
     {
         public int BorrowedID { get; set; }
 
-        public DateTime BorrowedDate { get; set; }
+        public DateOnly BorrowedDate { get; set; }
 
-        public DateTime DueDate { get; set; }
+        public DateOnly DueDate { get; set; }
 
-        public DateTime ReturnedDate { get; set; }
+        public DateOnly ReturnedDate { get; set; }
 
         public string MemberID { get; set; }
 
