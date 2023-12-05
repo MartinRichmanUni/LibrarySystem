@@ -4,7 +4,7 @@
     ViewData["Title"] = "Add New Book";
 }
 
-<form method="post" asp-controller="Book" asp-action="NewBook">
+<form method="post" asp-controller="Book" asp-action="AddBook">
     <div>
         <label asp-for="BookTitle"></label> <br />
         <input asp-for="BookTitle" />
@@ -18,8 +18,8 @@
         <input asp-for="Author" />
     </div>
     <div>
-        <label type="checkbox" asp-for="Borrowed"></label> <br />
-        <input type="checkbox" asp-for="Borrowed" />
+        <label asp-for="StockAmount"></label> <br />
+        <input asp-for="StockAmount" />
     </div>
     <button type="submit"> Add New Book </button>
 </form>

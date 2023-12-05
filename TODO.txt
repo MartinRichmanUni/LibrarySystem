@@ -1,0 +1,5 @@
+Add Edit Page for Books, allowing to change book details and changing stock amount.
+Change stock amount when user borrows a book, don't allow book to be borrowed if stock is zero.
+Add Customer Page to show a list of all customers, further view to display books user has borrowed and any outstanding.
+Add outstanding check to user's books if they are passed due date and haven't been returned.
+Look at ways to store multiple genres for a single book

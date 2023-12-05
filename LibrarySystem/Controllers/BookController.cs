@@ -83,6 +83,15 @@ public class BookController : Controller
         return View();
     }
 
+    [HttpPost]
+    public async Task<IActionResult> AddBook([Bind("BookTitle,Genre, Author, StockAmount")] Book book)
+    {
+        _context.Books.Add(book);
+        await _context.SaveChangesAsync();
+        ViewBag.Message = "Book Added Successfully";  
+        return RedirectToAction("ViewBooks");
+    }
+
     public IActionResult BorrowBook(int id)
     {
         var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -106,14 +115,18 @@ public class BookController : Controller
     // Look at ways to set DueDate to user's chosen date + 14 days
     // ReturnedDate is not bound but still returns the date as "01/01/0001" within the database
     [HttpPost]
-    public IActionResult BorrowBook([Bind("BorrowedDate, DueDate, MemberID, BookID")] Borrowed uBook)
+    public async Task<IActionResult> BorrowBook([Bind("BorrowedDate, DueDate, MemberID, BookID")] Borrowed uBook)
     {
         _context.Borrowed.Add(uBook);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
+
+        var stockChange = await _context.Books.FirstOrDefaultAsync(b => b.BookID == uBook.BookID) ?? throw new Exception("ID not found");
+        stockChange.StockAmount -= 1;
+        await _context.SaveChangesAsync();
+        
         return RedirectToAction("ViewBooks");
     }
     
-
     public async Task<IActionResult> DeleteBook(int? id)
     {
          if (id == null)
@@ -131,13 +144,5 @@ public class BookController : Controller
     return RedirectToAction("Index");
     }
 
-    // POST: Add Book
-    [HttpPost]
-    public async Task<IActionResult> NewBook([Bind("BookTitle,Genre, Author, Borrowed")] Book book)
-    {
-        _context.Books.Add(book);
-        _context.SaveChanges();
-        ViewBag.Message = "Book Added Successfully";  
-        return RedirectToAction("ViewBooks");
-    }
+   
 }

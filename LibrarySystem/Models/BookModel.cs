@@ -10,6 +10,6 @@ namespace LibrarySystem.Models
 
         public string Author { get; set; }
 
-        public bool Borrowed { get; set; }
+        public int StockAmount { get; set; }
     }
 }

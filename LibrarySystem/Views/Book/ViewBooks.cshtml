@@ -29,7 +29,13 @@
                 <td>@book.Genre</td>
                 <td>@book.Author</td>
                 <td>
-                    <a asp-action="BorrowBook" asp-route-id="@book.BookID"> Borrow Book </a>
+                    @if (book.StockAmount == 0)
+                    {
+                        <p> Out of Stock </p>
+                    } else {
+                        <a asp-action="BorrowBook" asp-route-id="@book.BookID"> Borrow Book </a>
+                    }
+                    
                 </td>
                 
             </tr>
