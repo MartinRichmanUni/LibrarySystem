@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "User Book Page";
+    var currentDay = DateOnly.FromDateTime(DateTime.Now);
 }
 
 <table class="table">
@@ -23,6 +24,12 @@
                 <td>@borrowed.BorrowedDate</td>
                 <td>@borrowed.DueDate</td>
                 <td>@borrowed.ReturnedDate</td>
+                @if (borrowed.DueDate < borrowed.ReturnedDate)
+                {
+                    <td> Overdue Book </td>
+                } else if (borrowed.DueDate < currentDay && borrowed.ReturnedDate == null){
+                    <td> Book is Overdue</td>
+                }
             </tr>
         } 
 </table>

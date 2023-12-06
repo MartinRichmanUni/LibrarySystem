@@ -112,11 +112,11 @@ public class BookController : Controller
         return View(book);
     }
 
-    // Look at ways to set DueDate to user's chosen date + 14 days
-    // ReturnedDate is not bound but still returns the date as "01/01/0001" within the database
+    // ReturnedDate is not bound but returns "null" within the database
     [HttpPost]
     public async Task<IActionResult> BorrowBook([Bind("BorrowedDate, DueDate, MemberID, BookID")] Borrowed uBook)
     {
+        uBook.DueDate = uBook.BorrowedDate.AddDays(14);
         _context.Borrowed.Add(uBook);
         await _context.SaveChangesAsync();
 
@@ -143,6 +143,44 @@ public class BookController : Controller
     await _context.SaveChangesAsync();
     return RedirectToAction("Index");
     }
+
+    public IActionResult EditBook(int id)
+    {
+        var book = (from b in _context.Books
+                    where b.BookID == id
+                    select new Book
+                    {
+                        BookID = b.BookID,
+                        BookTitle = b.BookTitle,
+                        Genre = b.Genre,
+                        Author = b.Author,
+                        StockAmount = b.StockAmount
+                    }).FirstOrDefault();
+
+        return View(book);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> EditBook(int id, [Bind("BookTitle, Author, Genre, StockAmount")] Book book)
+    {
+        var bookUpdate = _context.Books.Find(id);
+
+        if (bookUpdate == null)
+        {
+            return NotFound();
+        }
+
+        bookUpdate.BookTitle = book.BookTitle;
+        bookUpdate.Author = book.Author;
+        bookUpdate.Genre = book.Genre;
+        bookUpdate.StockAmount = book.StockAmount;
+
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction("ViewBooks");
+    }
+
+
 
    
 }

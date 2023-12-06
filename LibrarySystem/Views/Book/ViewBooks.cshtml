@@ -29,6 +29,9 @@
                 <td>@book.Genre</td>
                 <td>@book.Author</td>
                 <td>
+                    <a asp-action="EditBook" asp-route-id="@book.BookID"> Edit Book</a>
+                </td>
+                <td>
                     @if (book.StockAmount == 0)
                     {
                         <p> Out of Stock </p>

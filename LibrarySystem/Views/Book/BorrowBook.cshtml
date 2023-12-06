@@ -30,7 +30,7 @@
     <input type="datetime-local" asp-for="BorrowedDate" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-ddThh:mm")" max="@DateTime.Now.AddDays(21).ToString("yyyy-MM-ddThh:mm")" id="BorrowedDate"/>
     <p> Regular timeframe for borrowing a book is 2 weeks from the date of delivery. Extensions can be organised by getting into contact with customer support. Any books not returned before their due date are subject to fees </p>
     
-    <input type="hidden" asp-for="DueDate" value="@Model.BorrowedDate.AddDays(14)"/>
+    <input type="hidden" asp-for="DueDate"/>
     <input type="hidden" asp-for="BookID"/>
     <input type="hidden" asp-for="MemberID"/>
     <button type="submit"> Add New Book </button>

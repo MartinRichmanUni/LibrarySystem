@@ -8,7 +8,7 @@ namespace LibrarySystem.Models
 
         public DateOnly DueDate { get; set; }
 
-        public DateOnly ReturnedDate { get; set; }
+        public DateOnly? ReturnedDate { get; set; }
 
         public string MemberID { get; set; }
 

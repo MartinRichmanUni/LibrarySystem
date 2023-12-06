@@ -9,61 +9,65 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = LibrarySystem
 build_property.RootNamespace = LibrarySystem
-build_property.ProjectDir = E:\Users\Marty\Music\Library_System\LibrarySystem\LibrarySystem\
+build_property.ProjectDir = e:\Users\Marty\Music\Library_System\LibrarySystem\LibrarySystem\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = E:\Users\Marty\Music\Library_System\LibrarySystem\LibrarySystem
+build_property.MSBuildProjectDirectory = e:\Users\Marty\Music\Library_System\LibrarySystem\LibrarySystem
 build_property._RazorSourceGeneratorDebug = 
 
-[E:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Account/Login.cshtml]
+[e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Account/Register.cshtml]
+[e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Book/AddBook.cshtml]
+[e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Book/AddBook.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xBZGRCb29rLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Book/BorrowBook.cshtml]
+[e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Book/BorrowBook.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xCb3Jyb3dCb29rLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Book/UserBooks.cshtml]
+[e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Book/EditBook.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xFZGl0Qm9vay5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Book/UserBooks.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xVc2VyQm9va3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Book/ViewBooks.cshtml]
+[e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Book/ViewBooks.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xWaWV3Qm9va3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Home/Index.cshtml]
+[e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Home/Privacy.cshtml]
+[e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Shared/Error.cshtml]
+[e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Shared/_ValidationScriptsPartial.cshtml]
+[e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/_ViewImports.cshtml]
+[e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/_ViewStart.cshtml]
+[e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Shared/_Layout.cshtml]
+[e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-3967bacgau
