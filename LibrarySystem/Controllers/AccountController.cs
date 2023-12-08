@@ -87,6 +87,6 @@ public IActionResult Register()
     {
         await _signInManager.SignOutAsync();
 
-        return RedirectToAction("Login");
+        return RedirectToAction("Index","Home");
     }
 }

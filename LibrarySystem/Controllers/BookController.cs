@@ -5,6 +5,7 @@ using LibrarySystem.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using X.PagedList;
 
 namespace LibrarySystem.Controllers;
 
@@ -20,20 +21,58 @@ public class BookController : Controller
 
     // Either returns all books or based on search results
     // Using https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/search?view=aspnetcore-8.0 as a tutorial
-    public async Task<IActionResult> ViewBooks(string bookGenre, string searchResult)
+    // https://learn.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/sorting-filtering-and-paging-with-the-entity-framework-in-an-asp-net-mvc-application
+    public async Task<IActionResult> ViewBooks(string bookGenre, string searchResult, string sortOrder, string currentFilter, int? page)
     {
         if (_context.Books == null)
         {
             return Problem("No Books are within the system");
         }
 
-        // List of Genres
         IQueryable<string> genreQuery = from b in _context.Books
                                     orderby b.Genre
                                     select b.Genre;
+        
+        ViewBag.CurrentSort = sortOrder;
+        ViewBag.TitleSort = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+        ViewBag.GenreSort = sortOrder == "Genre" ? "genre_desc" : "Genre";
+        ViewBag.AuthorSort = sortOrder == "Author" ? "author_desc" : "Author";
+
+        if (searchResult != null)
+        {
+            page = 1;
+        }
+        else 
+        {
+            searchResult = currentFilter;
+        }
+
+        ViewBag.currentFilter = searchResult;
 
         var books = from b in _context.Books
                     select b;
+
+        switch (sortOrder)
+        {
+            case "title_desc":
+                books = books.OrderByDescending(b => b.BookTitle);
+                break;
+            case "genre_desc":
+                books = books.OrderByDescending(b => b.Genre);
+                break;
+            case "Genre":
+                books = books.OrderBy(b => b.Genre);
+                break;
+            case "author_desc":
+                books = books.OrderByDescending(b => b.Author);
+                break;
+            case "Author":
+                books = books.OrderBy(b => b.Author);
+                break;
+            default:
+                books = books.OrderBy(b => b.BookTitle);
+                break;
+        }
 
         if (!String.IsNullOrEmpty(searchResult))
         {
@@ -45,10 +84,12 @@ public class BookController : Controller
             books = books.Where(g => g.Genre == bookGenre);
         }
 
+        int pageSize = 2;
+        int pageNumber = (page ?? 1);
         var bookGenreView = new BookGenreViewModel
         {
             Genres = new SelectList(await genreQuery.Distinct().ToListAsync()),
-            Books = await books.ToListAsync()
+            Books = books.ToPagedList(pageNumber, pageSize)
         };
 
         return View(bookGenreView);

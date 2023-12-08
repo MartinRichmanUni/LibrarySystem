@@ -1,4 +1,6 @@
 @model LibrarySystem.Models.BookGenreViewModel
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
 
 @{
     ViewData["Title"] = "Book Page";
@@ -8,23 +10,26 @@
         <select asp-for="BookGenre" asp-items="Model.Genres">
             <option value="">All</option>
         </select>
-
-        Title: <input type="text" name="SearchResult" />
+        Find by Title: @Html.TextBox("SearchResult", ViewBag.CurrentFilter as string)
         <input type="submit" value="Filter" />
     </p>
 </form>
 <table class="table">
     <tr>
-        <th>@Html.DisplayNameFor(model => model.Books![0].BookID) </th>
-        <th> @Html.DisplayNameFor(model => model.Books![0].BookTitle) </th>
-        <th> @Html.DisplayNameFor(model => model.Books![0].Genre)</th>
-        <th> @Html.DisplayNameFor(model => model.Books![0].Author) </th>
+        <th> 
+            @Html.ActionLink(Html.DisplayNameFor(model => model.Books![0].BookTitle), "ViewBooks", new {sortOrder = ViewBag.TitleSort, currentFilter = ViewBag.CurrentFilter})
+        </th>
+        <th> 
+            @Html.ActionLink(Html.DisplayNameFor(model => model.Books![0].Genre), "ViewBooks", new {sortOrder = ViewBag.GenreSort, currentFilter = ViewBag.CurrentFilter})
+        </th>
+        <th> 
+            @Html.ActionLink(Html.DisplayNameFor(model => model.Books![0].Author), "ViewBooks", new {sortOrder = ViewBag.AuthorSort, currentFilter = ViewBag.CurrentFilter})
+        </th>
     </tr>
     
        @foreach (var book in Model.Books!)
         {
             <tr>
-                <td>@book.BookID</td>
                 <td>@book.BookTitle</td>
                 <td>@book.Genre</td>
                 <td>@book.Author</td>
@@ -36,7 +41,13 @@
                     {
                         <p> Out of Stock </p>
                     } else {
-                        <a asp-action="BorrowBook" asp-route-id="@book.BookID"> Borrow Book </a>
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            <a asp-action="BorrowBook" asp-route-id="@book.BookID"> Borrow Book </a>
+                        } else {
+                            <p> Not Logged In </p>
+                        }
+                        
                     }
                     
                 </td>
@@ -44,4 +55,7 @@
             </tr>
         } 
 </table>
+<br />
+@Html.PagedListPager(@Model.Books, page => Url.Action("ViewBooks", new { page }))
 <a asp-area="" asp-controller="Book" asp-action="AddBook">Add New Book</a>
+

@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "YADKECGqhiOjOIDUCAceqPOehRO0rvm0cWQ2Vt+SBjhysOi6KX9EJxhN8xmvnPeET+w0Ex51H3e1APm+Rmp2yw==",
+  "dgSpecHash": "TOJ2qiceArs0S7QVsq0uL2rzRVnwk6bGk4lZeWLQjOseC1mLzj+mUwUdJPfizL+C1Thk3J9Yk2U+q4xeQctcng==",
   "success": true,
   "projectFilePath": "E:\\Users\\Marty\\Music\\Library_System\\LibrarySystem\\LibrarySystem\\LibrarySystem.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Marty\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\Marty\\.nuget\\packages\\jetbrains.annotations\\2022.3.1\\jetbrains.annotations.2022.3.1.nupkg.sha512",
     "C:\\Users\\Marty\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\Marty\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Marty\\.nuget\\packages\\microsoft.aspnetcore.authentication.cookies\\2.2.0\\microsoft.aspnetcore.authentication.cookies.2.2.0.nupkg.sha512",
@@ -59,7 +60,9 @@
     "C:\\Users\\Marty\\.nuget\\packages\\system.security.permissions\\4.5.0\\system.security.permissions.4.5.0.nupkg.sha512",
     "C:\\Users\\Marty\\.nuget\\packages\\system.security.principal.windows\\4.5.0\\system.security.principal.windows.4.5.0.nupkg.sha512",
     "C:\\Users\\Marty\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
-    "C:\\Users\\Marty\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512"
+    "C:\\Users\\Marty\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
+    "C:\\Users\\Marty\\.nuget\\packages\\x.pagedlist\\9.0.0-prerelease\\x.pagedlist.9.0.0-prerelease.nupkg.sha512",
+    "C:\\Users\\Marty\\.nuget\\packages\\x.pagedlist.mvc.core\\9.0.0-prerelease\\x.pagedlist.mvc.core.9.0.0-prerelease.nupkg.sha512"
   ],
   "logs": []
 }

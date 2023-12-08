@@ -86,3 +86,7 @@ E:\Users\Marty\Music\Library_System\LibrarySystem\LibrarySystem\obj\Debug\net7.0
 E:\Users\Marty\Music\Library_System\LibrarySystem\LibrarySystem\obj\Debug\net7.0\LibrarySystem.pdb
 E:\Users\Marty\Music\Library_System\LibrarySystem\LibrarySystem\obj\Debug\net7.0\LibrarySystem.genruntimeconfig.cache
 E:\Users\Marty\Music\Library_System\LibrarySystem\LibrarySystem\obj\Debug\net7.0\ref\LibrarySystem.dll
+E:\Users\Marty\Music\Library_System\LibrarySystem\LibrarySystem\obj\Debug\net7.0\LibrarySystem.MvcApplicationPartsAssemblyInfo.cs
+E:\Users\Marty\Music\Library_System\LibrarySystem\LibrarySystem\bin\Debug\net7.0\JetBrains.Annotations.dll
+E:\Users\Marty\Music\Library_System\LibrarySystem\LibrarySystem\bin\Debug\net7.0\X.PagedList.dll
+E:\Users\Marty\Music\Library_System\LibrarySystem\LibrarySystem\bin\Debug\net7.0\X.PagedList.Mvc.Core.dll

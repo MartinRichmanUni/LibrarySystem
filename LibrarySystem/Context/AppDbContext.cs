@@ -24,6 +24,5 @@ namespace LibrarySystem.Context
 
         public DbSet<Borrowed> Borrowed { get; set; }
 
-        
     }
 }
