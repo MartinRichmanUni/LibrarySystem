@@ -39,9 +39,11 @@ public IActionResult Register()
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
+            
 
             if (result.Succeeded)
             {
+                await _userManager.AddToRoleAsync(user, "Member");
                 await _signInManager.SignInAsync(user, isPersistent: false);
 
                 return RedirectToAction("index", "Home");

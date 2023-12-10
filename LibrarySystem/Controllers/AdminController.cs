@@ -3,9 +3,11 @@ using LibrarySystem.Context;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using LibrarySystem.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibrarySystem.Controllers;
 
+[Authorize(Roles = "Admin")]
 public class AdminController : Controller
 {
     // private readonly UserManager<ApplicationUser> _userManager;
@@ -16,7 +18,8 @@ public class AdminController : Controller
         // _userManager = userManager;
         _context = context;
     }
-    public async Task<IActionResult> ViewAllUsers()
+    
+    public IActionResult ViewAllUsers()
     {
         var users = from m in _context.Users
                     select new UserModel
