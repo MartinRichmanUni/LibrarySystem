@@ -10,12 +10,10 @@ namespace LibrarySystem.Controllers;
 [Authorize(Roles = "Admin")]
 public class AdminController : Controller
 {
-    // private readonly UserManager<ApplicationUser> _userManager;
     private readonly AppDbContext _context;
 
     public AdminController(AppDbContext context)
     {
-        // _userManager = userManager;
         _context = context;
     }
     
@@ -29,6 +27,7 @@ public class AdminController : Controller
                         LastName = m.LastName,
                         Email = m.Email,
                     };
+
         return View(users);
     }
 
@@ -49,7 +48,43 @@ public class AdminController : Controller
                             DueDate = Borrowed.DueDate,
                             ReturnedDate = Borrowed.ReturnedDate
                         };
-
+        ViewData["id"] = id;
         return View(userBooks);
+    }
+
+    public IActionResult EditBook(int id)
+    {
+        var book = (from b in _context.Books
+                    where b.BookID == id
+                    select new Book
+                    {
+                        BookID = b.BookID,
+                        BookTitle = b.BookTitle,
+                        Genre = b.Genre,
+                        Author = b.Author,
+                        StockAmount = b.StockAmount
+                    }).FirstOrDefault();
+
+        return View(book);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> EditBook(int id, [Bind("BookTitle, Author, Genre, StockAmount")] Book book)
+    {
+        var bookUpdate = _context.Books.Find(id);
+
+        if (bookUpdate == null)
+        {
+            return NotFound();
+        }
+
+        bookUpdate.BookTitle = book.BookTitle;
+        bookUpdate.Author = book.Author;
+        bookUpdate.Genre = book.Genre;
+        bookUpdate.StockAmount = book.StockAmount;
+
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction("ViewBooks");
     }
 }

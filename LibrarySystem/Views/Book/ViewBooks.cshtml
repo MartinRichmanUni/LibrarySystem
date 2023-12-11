@@ -33,6 +33,10 @@
                 <td>@book.BookTitle</td>
                 <td>@book.Genre</td>
                 <td>@book.Author</td>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <td> @Html.ActionLink("Edit Book", "EditBook", "Admin", new {id = book.BookID}) </td>
+                }
                 <td>
                     @if (book.StockAmount == 0)
                     {

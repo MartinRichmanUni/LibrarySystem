@@ -1,0 +1,40 @@
+@model IEnumerable<LibrarySystem.Models.UserBooks>
+
+@{
+    var currentDay = DateOnly.FromDateTime(DateTime.Now);
+}
+
+<table class="table">
+    <tr>
+        <th> Book Title </th>
+        <th> Genre </th>
+        <th> Author </th>
+        <th> Borrowed Date </th>
+        <th> Due Date</th>
+        <th> Returned Date </th>
+        <th> Status </th>
+    </tr>
+    
+       @foreach (var borrowed in Model)
+        {
+            <tr>
+                <td>@borrowed.BookTitle</td>
+                <td>@borrowed.Genre</td>
+                <td>@borrowed.Author</td>
+                <td>@borrowed.BorrowedDate</td>
+                <td>@borrowed.DueDate</td>
+                <td>@borrowed.ReturnedDate</td>
+                @if (borrowed.DueDate > borrowed.ReturnedDate && borrowed.ReturnedDate != null)
+                {
+                    <td> Returned on Time </td>
+                } 
+                else if (borrowed.DueDate < borrowed.ReturnedDate && borrowed.ReturnedDate != null)
+                {
+                    <td> Book Returned Late </td>
+                } else if (borrowed.DueDate < currentDay && borrowed.ReturnedDate == null){
+                    <td> Book is Overdue</td>
+                }
+                <td> <a> Return Book </a></td>
+            </tr>
+        } 
+</table>

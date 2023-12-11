@@ -24,6 +24,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Admin/EditBook.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdEJvb2suY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Admin/ViewAllUsers.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVmlld0FsbFVzZXJzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -40,10 +44,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xCb3Jyb3dCb29rLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Book/EditBook.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xFZGl0Qm9vay5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Book/UserBooks.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xVc2VyQm9va3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -58,6 +58,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Shared/Components/UserBooks/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcVXNlckJvb2tzXERlZmF1bHQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Shared/Error.cshtml]

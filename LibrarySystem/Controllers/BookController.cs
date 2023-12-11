@@ -185,43 +185,4 @@ public class BookController : Controller
     return RedirectToAction("Index");
     }
 
-    public IActionResult EditBook(int id)
-    {
-        var book = (from b in _context.Books
-                    where b.BookID == id
-                    select new Book
-                    {
-                        BookID = b.BookID,
-                        BookTitle = b.BookTitle,
-                        Genre = b.Genre,
-                        Author = b.Author,
-                        StockAmount = b.StockAmount
-                    }).FirstOrDefault();
-
-        return View(book);
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> EditBook(int id, [Bind("BookTitle, Author, Genre, StockAmount")] Book book)
-    {
-        var bookUpdate = _context.Books.Find(id);
-
-        if (bookUpdate == null)
-        {
-            return NotFound();
-        }
-
-        bookUpdate.BookTitle = book.BookTitle;
-        bookUpdate.Author = book.Author;
-        bookUpdate.Genre = book.Genre;
-        bookUpdate.StockAmount = book.StockAmount;
-
-        await _context.SaveChangesAsync();
-
-        return RedirectToAction("ViewBooks");
-    }
-
-
-
-   
 }
