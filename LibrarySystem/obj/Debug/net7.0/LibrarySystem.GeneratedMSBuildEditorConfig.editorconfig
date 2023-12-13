@@ -24,6 +24,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Admin/AddBook.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkQm9vay5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Admin/EditBook.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdEJvb2suY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -34,10 +38,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Admin/ViewUser.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVmlld1VzZXIuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Book/AddBook.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xBZGRCb29rLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Book/BorrowBook.cshtml]

@@ -37,7 +37,9 @@
                 {
                     <td> @Html.ActionLink("Edit Book", "EditBook", "Admin", new {id = book.BookID}) </td>
                 }
+                <td> @Html.ActionLink("Delete Book", "DeleteBook", "Admin", new {id = book.BookID})</td>
                 <td>
+                
                     @if (book.StockAmount == 0)
                     {
                         <p> Out of Stock </p>
@@ -58,5 +60,9 @@
 </table>
 <br />
 @Html.PagedListPager(@Model.Books, page => Url.Action("ViewBooks", new { page }))
-<a asp-area="" asp-controller="Book" asp-action="AddBook">Add New Book</a>
+@if (User.Identity.IsAuthenticated)
+{
+    <a asp-area="" asp-controller="Admin" asp-action="AddBook">Add New Book</a>
+}
+
 

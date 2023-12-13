@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LibrarySystem.Context;
 using LibrarySystem.Models;
-using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using X.PagedList;
@@ -84,7 +83,7 @@ public class BookController : Controller
             books = books.Where(g => g.Genre == bookGenre);
         }
 
-        int pageSize = 2;
+        int pageSize = 10;
         int pageNumber = (page ?? 1);
         var bookGenreView = new BookGenreViewModel
         {
@@ -119,39 +118,6 @@ public class BookController : Controller
         return View(userBooks);
     }
 
-    public IActionResult AddBook()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> AddBook([Bind("BookTitle,Genre, Author, StockAmount")] Book book)
-    {
-        _context.Books.Add(book);
-        await _context.SaveChangesAsync();
-        ViewBag.Message = "Book Added Successfully";  
-        return RedirectToAction("ViewBooks");
-    }
-
-    public IActionResult BorrowBook(int id)
-    {
-        var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        var book = (from b in _context.Books
-                    where b.BookID == id
-                    select new UserBooks
-                    {
-                        BookID = b.BookID,
-                        BookTitle = b.BookTitle,
-                        Genre = b.Genre,
-                        Author = b.Author,
-                        MemberID = user
-                    }
-                    
-                    ).FirstOrDefault();
-
-        return View(book);
-    }
 
     // ReturnedDate is not bound but returns "null" within the database
     [HttpPost]
@@ -168,21 +134,6 @@ public class BookController : Controller
         return RedirectToAction("ViewBooks");
     }
     
-    public async Task<IActionResult> DeleteBook(int? id)
-    {
-         if (id == null)
-    {
-        return NotFound();
-    }
-
-    var book = await _context.Books.FirstOrDefaultAsync(b => b.BookID == id);
-    if (book == null)
-    {
-        return NotFound();
-    }
-    _context.Books.Remove(book);
-    await _context.SaveChangesAsync();
-    return RedirectToAction("Index");
-    }
+   
 
 }
