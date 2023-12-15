@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using LibrarySystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using X.PagedList;
 
 namespace LibrarySystem.Controllers;
 
@@ -18,8 +19,25 @@ public class AdminController : Controller
         _context = context;
     }
     
-    public IActionResult ViewAllUsers()
+    public IActionResult ViewAllUsers(string sortOrder, string currentFilter, string searchResult, int? page)
     {
+
+        ViewBag.CurrentSort = sortOrder;
+        ViewBag.FNameSort = String.IsNullOrEmpty(sortOrder) ? "FNameDesc" : "";
+        ViewBag.LNameSort = sortOrder == "LastName" ? "LNameDesc" : "LastName";
+        ViewBag.Email = sortOrder == "Email" ? "EmailDesc" : "Email";
+
+        if (searchResult != null)
+        {
+            page = 1;
+        } 
+        else
+        {
+            searchResult = currentFilter;
+        }
+
+        ViewBag.currentFilter = searchResult;
+
         var users = from m in _context.Users
                     select new UserModel
                     {
@@ -29,28 +47,49 @@ public class AdminController : Controller
                         Email = m.Email,
                     };
 
+        switch(sortOrder)
+        {
+            case "FNameDesc":
+                users = users.OrderByDescending(u => u.FirstName);
+                break;
+            case "LastName":
+                users = users.OrderBy(u => u.LastName);
+                break;
+            case "LNameDesc":
+                users = users.OrderByDescending(u => u.LastName);
+                break;
+            case "Email":
+                users = users.OrderBy(u => u.Email);
+                break;
+            case "EmailDesc":
+                users = users.OrderByDescending(u => u.Email);
+                break;
+            default:
+                users = users.OrderBy(u => u.FirstName);
+                break;  
+        }
+
+        int pageSize = 10;
+        int pageNumber = (page ?? 1);
+        if (!String.IsNullOrEmpty(searchResult))
+        {
+            users = users.Where(u => u.FirstName.Contains(searchResult));
+        }
+
         return View(users);
     }
 
-    public IActionResult ViewUser(string id)
+    public IActionResult ViewUser(string id, string searchResult, string sortOrder, string currentFilter, int? page)
     {
-        var userBooks = from Book in _context.Books 
-                        join Borrowed in _context.Borrowed
-                        on Book.BookID equals Borrowed.BookID into BorrowedBooks
-                        from Borrowed in BorrowedBooks.DefaultIfEmpty()
-                        where Borrowed.MemberID == id
-                        select new UserBooks
-                        {
-                            BookID = Book.BookID,
-                            BookTitle = Book.BookTitle,
-                            Genre = Book.Genre,
-                            Author = Book.Author,
-                            BorrowedDate = Borrowed.BorrowedDate,
-                            DueDate = Borrowed.DueDate,
-                            ReturnedDate = Borrowed.ReturnedDate
-                        };
-        ViewData["id"] = id;
-        return View(userBooks);
+
+        return ViewComponent("UserBooks",
+                    new {
+                        id = id,
+                        searchResult = searchResult,
+                        sortOrder = sortOrder,
+                        currentFilter = currentFilter,
+                        page = page
+                    });
     }
 
     public IActionResult EditBook(int id)
@@ -86,7 +125,7 @@ public class AdminController : Controller
 
         await _context.SaveChangesAsync();
 
-        return RedirectToAction("ViewBooks");
+        return RedirectToAction("ViewBooks", "Book");
     }
 
     public IActionResult AddBook()
@@ -101,26 +140,6 @@ public class AdminController : Controller
         await _context.SaveChangesAsync();
         ViewBag.Message = "Book Added Successfully";  
         return RedirectToAction("ViewBooks", "Book");
-    }
-
-    public IActionResult BorrowBook(int id)
-    {
-        var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        var book = (from b in _context.Books
-                    where b.BookID == id
-                    select new UserBooks
-                    {
-                        BookID = b.BookID,
-                        BookTitle = b.BookTitle,
-                        Genre = b.Genre,
-                        Author = b.Author,
-                        MemberID = user
-                    }
-                    
-                    ).FirstOrDefault();
-
-        return View(book);
     }
 
      public async Task<IActionResult> DeleteBook(int? id)
@@ -138,5 +157,46 @@ public class AdminController : Controller
     _context.Books.Remove(book);
     await _context.SaveChangesAsync();
     return RedirectToAction("ViewBooks", "Book");
+    }
+
+    public IActionResult ReturnBook(string userID, int bookID)
+    {
+        var userBook = (from Book in _context.Books 
+                        join Borrowed in _context.Borrowed
+                        on Book.BookID equals Borrowed.BookID into BorrowedBooks
+                        from Borrowed in BorrowedBooks.DefaultIfEmpty()
+                        where Borrowed.MemberID == userID && Borrowed.BookID == bookID
+                        select new UserBooks
+                        {
+                            BookID = Borrowed.BookID,
+                            BookTitle = Book.BookTitle,
+                            Genre = Book.Genre,
+                            Author = Book.Author,
+                            BorrowedDate = Borrowed.BorrowedDate,
+                            DueDate = Borrowed.DueDate,
+                            ReturnedDate = DateOnly.FromDateTime(DateTime.Now),
+                            MemberID = Borrowed.MemberID
+                        }).FirstOrDefault();
+        return View(userBook);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> ReturnBook(DateOnly returnedDate, int bookID, string memberID)
+    {
+        var borrowedBook = (from b in _context.Borrowed
+                            where b.BookID == bookID && b.MemberID == memberID && b.ReturnedDate == null
+                            select b ).FirstOrDefault();
+
+        borrowedBook.ReturnedDate = returnedDate;
+
+        var stockUpdate = (from b in _context.Books
+                            where b.BookID == bookID
+                            select b).FirstOrDefault();
+        
+        stockUpdate.StockAmount += 1;
+
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction("ViewAllUsers");
     }
 }

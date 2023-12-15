@@ -15,9 +15,26 @@ public class UserBooksViewComponent : ViewComponent
         _context = context;
     }
 
-    public async Task<IViewComponentResult> InvokeAsync(string id)
+    public async Task<IViewComponentResult> InvokeAsync(string id, string searchResult, string sortOrder, string currentFilter, int? page)
     {
-        var books = from Book in _context.Books 
+        ViewBag.CurrentSort = sortOrder;
+        ViewBag.TitleSort = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+        ViewBag.GenreSort = sortOrder == "Genre" ? "genre_desc" : "Genre";
+        ViewBag.AuthorSort = sortOrder == "Author" ? "email_desc" : "Author";
+
+        if (searchResult != null)
+        {
+            page = 1;
+        } 
+        else
+        {
+            searchResult = currentFilter;
+        }
+
+        ViewBag.currentFilter = searchResult;
+
+
+        var userBooks = from Book in _context.Books 
                         join Borrowed in _context.Borrowed
                         on Book.BookID equals Borrowed.BookID into BorrowedBooks
                         from Borrowed in BorrowedBooks.DefaultIfEmpty()
@@ -29,9 +46,36 @@ public class UserBooksViewComponent : ViewComponent
                             Author = Book.Author,
                             BorrowedDate = Borrowed.BorrowedDate,
                             DueDate = Borrowed.DueDate,
-                            ReturnedDate = Borrowed.ReturnedDate
+                            ReturnedDate = Borrowed.ReturnedDate,
                         };
-        return View(books);
+
+        switch(sortOrder)
+        {
+            case "title_desc":
+                userBooks = userBooks.OrderByDescending(u => u.BookTitle);
+                break;
+            case "Genre":
+                userBooks = userBooks.OrderBy(u => u.Genre);
+                break;
+            case "genre_desc":
+                userBooks = userBooks.OrderByDescending(u => u.Genre);
+                break;
+            case "Author":
+                userBooks = userBooks.OrderBy(u => u.Author);
+                break;
+            case "author_desc":
+                userBooks = userBooks.OrderByDescending(u => u.Author);
+                break;
+            default:
+                userBooks = userBooks.OrderBy(u => u.BookTitle);
+                break;  
+        }
+        
+        if (!String.IsNullOrEmpty(searchResult))
+        {
+            userBooks = userBooks.Where(u => u.BookTitle!.Contains(searchResult));
+        }
+        return View(userBooks);
     }
 
 

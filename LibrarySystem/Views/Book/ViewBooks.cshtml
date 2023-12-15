@@ -25,6 +25,13 @@
         <th> 
             @Html.ActionLink(Html.DisplayNameFor(model => model.Books![0].Author), "ViewBooks", new {sortOrder = ViewBag.AuthorSort, currentFilter = ViewBag.CurrentFilter})
         </th>
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+        {
+        <th>
+            @Html.DisplayNameFor(model => Model.Books![0].StockAmount)
+        </th>
+        }
+        
     </tr>
     
        @foreach (var book in Model.Books!)
@@ -33,11 +40,16 @@
                 <td>@book.BookTitle</td>
                 <td>@book.Genre</td>
                 <td>@book.Author</td>
+                
                 @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                 {
+                    <td>@book.StockAmount</td>
                     <td> @Html.ActionLink("Edit Book", "EditBook", "Admin", new {id = book.BookID}) </td>
                 }
-                <td> @Html.ActionLink("Delete Book", "DeleteBook", "Admin", new {id = book.BookID})</td>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <td> @Html.ActionLink("Delete Book", "DeleteBook", "Admin", new {id = book.BookID})</td>
+                }
                 <td>
                 
                     @if (book.StockAmount == 0)

@@ -118,6 +118,25 @@ public class BookController : Controller
         return View(userBooks);
     }
 
+    public IActionResult BorrowBook(int id)
+    {
+        var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        var book = (from b in _context.Books
+                    where b.BookID == id
+                    select new UserBooks
+                    {
+                        BookID = b.BookID,
+                        BookTitle = b.BookTitle,
+                        Genre = b.Genre,
+                        Author = b.Author,
+                        MemberID = user
+                    }
+                    
+                    ).FirstOrDefault();
+
+        return View(book);
+    }
 
     // ReturnedDate is not bound but returns "null" within the database
     [HttpPost]

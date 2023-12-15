@@ -5,13 +5,18 @@
 }
 
 <h1> View All Users </h1>
+<form asp-action="ViewAllUsers">
+    Find by User: @Html.TextBox("SearchResult", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Filter" />
+</form>
+
 
 <table class="table">
     <tr>
 
-        <th> First Name </th>
-        <th> Last Name </th>
-        <th> Email </th>
+        <th> @Html.ActionLink("First Name", "ViewAllUsers", new { sortOrder = ViewBag.FNameSort, currentFilter = ViewBag.CurrentFilter}) </th>
+        <th> @Html.ActionLink("Last Name", "ViewAllUsers", new { sortOrder = ViewBag.LNameSort, currentFilter = ViewBag.CurrentFilter}) </th>
+        <th> @Html.ActionLink("Email", "ViewAllUsers", new { sortOrder = ViewBag.Email, currentFilter = ViewBag.CurrentFilter})  </th>
     </tr>
 
     @foreach(UserModel user in Model)
