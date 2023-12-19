@@ -4,6 +4,7 @@ using LibrarySystem.Models;
 using Microsoft.AspNetCore.Identity;
 using LibrarySystem.Context;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace LibrarySystem.Controllers;
 
@@ -90,5 +91,13 @@ public IActionResult Register()
         await _signInManager.SignOutAsync();
 
         return RedirectToAction("Index","Home");
+    }
+
+    public async Task<IActionResult> ViewProfile()
+    {
+
+        var user = await _userManager.GetUserAsync(User);
+
+        return View(user);
     }
 }

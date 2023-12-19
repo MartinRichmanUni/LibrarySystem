@@ -4,3 +4,4 @@ Look at ways to store multiple genres for a single book
 Look at secure payment methods etc. 
 Add return book functionality for admin
 In user books, provide filters for all books, unreturned books and returned books
+Add a profile page for users

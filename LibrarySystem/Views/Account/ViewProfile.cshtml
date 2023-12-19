@@ -1,0 +1,16 @@
+@model LibrarySystem.Context.ApplicationUser
+
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<h1> User Profile </h1>
+
+<div>
+    @Html.DisplayNameFor(Model => Model.FirstName) <br />
+    @Html.DisplayFor(Model => Model.FirstName)
+</div>
+<div>
+    @Html.DisplayNameFor(Model => Model.LastName) <br />
+    @Html.DisplayFor(Model => Model.LastName)
+</div>

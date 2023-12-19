@@ -7,10 +7,10 @@
 }
 
 <form asp-action="ViewUser">
-    <select>
+    <select name="status">
         <option value="">All</option>
         <option value="Returned">Returned</option>
-        <option value="Unretruned">Unreturned</option>
+        <option value="Unreturned">Unreturned</option>
     </select>
     Find by Title: @Html.TextBox("SearchResult", ViewBag.CurrentFilter as string)
         <input type="submit" value="Filter" />

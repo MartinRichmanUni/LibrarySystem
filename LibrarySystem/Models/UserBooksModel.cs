@@ -16,6 +16,8 @@ namespace LibrarySystem.Models
         public DateOnly? ReturnedDate { get; set; }
 
         public string MemberID { get; set; }
+
+        public string BookStatus { get; set; }
         
     }
 }

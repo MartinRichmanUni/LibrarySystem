@@ -15,7 +15,7 @@ public class UserBooksViewComponent : ViewComponent
         _context = context;
     }
 
-    public async Task<IViewComponentResult> InvokeAsync(string id, string searchResult, string sortOrder, string currentFilter, int? page)
+    public async Task<IViewComponentResult> InvokeAsync(string id, string searchResult, string sortOrder, string currentFilter, int? page, string status)
     {
         ViewBag.CurrentSort = sortOrder;
         ViewBag.TitleSort = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
@@ -74,6 +74,15 @@ public class UserBooksViewComponent : ViewComponent
         if (!String.IsNullOrEmpty(searchResult))
         {
             userBooks = userBooks.Where(u => u.BookTitle!.Contains(searchResult));
+        }
+
+        if (status == "Returned")
+        {
+            userBooks = userBooks.Where(u => u.ReturnedDate != null);
+        } 
+        else if(status == "Unreturned")
+        {
+            userBooks = userBooks.Where(u => u.ReturnedDate == null);
         }
         return View(userBooks);
     }

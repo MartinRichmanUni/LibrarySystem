@@ -79,7 +79,7 @@ public class AdminController : Controller
         return View(users);
     }
 
-    public IActionResult ViewUser(string id, string searchResult, string sortOrder, string currentFilter, int? page)
+    public IActionResult ViewUser(string id, string searchResult, string sortOrder, string currentFilter, int? page, string status)
     {
 
         return ViewComponent("UserBooks",
@@ -88,7 +88,8 @@ public class AdminController : Controller
                         searchResult = searchResult,
                         sortOrder = sortOrder,
                         currentFilter = currentFilter,
-                        page = page
+                        page = page,
+                        status = status
                     });
     }
 
