@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = e:\Users\Marty\Music\Library_System\LibrarySystem\LibrarySystem
 build_property._RazorSourceGeneratorDebug = 
 
+[e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Account/ChangeEmail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDaGFuZ2VFbWFpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [e:/Users/Marty/Music/Library_System/LibrarySystem/LibrarySystem/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

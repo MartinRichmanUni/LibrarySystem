@@ -1,0 +1,21 @@
+@model LibrarySystem.Context.ApplicationUser
+
+@{
+    ViewData["Title"] = "Change Email";
+}
+
+<h1> Change E-mail </h1>
+
+<div>
+    <h3> Current E-mail Address </h3>
+    @Html.DisplayFor(Model => Model.Email)
+</div>
+<form action="ChangeEmail" method="post"> 
+    <div>
+        Please Enter a new E-mail Address <br />
+        <input name="email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+
+    </div>
+    <button type="submit"> Change E-mail</button>
+</form>

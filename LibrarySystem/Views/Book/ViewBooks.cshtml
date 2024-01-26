@@ -1,6 +1,7 @@
 @model LibrarySystem.Models.BookGenreViewModel
 @using X.PagedList.Mvc.Core;
 @using X.PagedList;
+@using Microsoft.AspNetCore.Identity
 
 @{
     ViewData["Title"] = "Book Page";
@@ -71,7 +72,7 @@
         } 
 </table>
 <br />
-@Html.PagedListPager(@Model.Books, page => Url.Action("ViewBooks", new { page }))
+@Html.PagedListPager(Model.Books, page => Url.Action("ViewBooks", new { page }))
 @if (User.Identity.IsAuthenticated)
 {
     <a asp-area="" asp-controller="Admin" asp-action="AddBook">Add New Book</a>

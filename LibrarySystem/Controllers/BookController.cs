@@ -95,27 +95,18 @@ public class BookController : Controller
     }
 
     // Gets a list of books users has borrowed
-    public async Task<IActionResult> UserBooks()
+    public IActionResult ViewUserBooks(string searchResult, string sortOrder, string currentFilter, int? page, string status)
     {
-        var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        // More information on Left Join using LINQ found at https://stackoverflow.com/questions/3404975/left-outer-join-in-linq
-        var userBooks = from Book in _context.Books 
-                        join Borrowed in _context.Borrowed
-                        on Book.BookID equals Borrowed.BookID into BorrowedBooks
-                        from Borrowed in BorrowedBooks.DefaultIfEmpty()
-                        where Borrowed.MemberID == user
-                        select new UserBooks
-                        {
-                            BookTitle = Book.BookTitle,
-                            Genre = Book.Genre,
-                            Author = Book.Author,
-                            BorrowedDate = Borrowed.BorrowedDate,
-                            DueDate = Borrowed.DueDate,
-                            ReturnedDate = Borrowed.ReturnedDate
-                        };
-
-        return View(userBooks);
+        var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        return ViewComponent("UserBooks",
+                    new {
+                        id = userID,
+                        searchResult,
+                        sortOrder,
+                        currentFilter,
+                        page,
+                        status
+                    });
     }
 
     public IActionResult BorrowBook(int id)

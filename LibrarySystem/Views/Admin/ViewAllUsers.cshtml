@@ -1,4 +1,6 @@
-@model IEnumerable<LibrarySystem.Models.UserModel>
+@model PagedList<LibrarySystem.Models.UserModel>
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
 
 @{
     ViewData["Title"] = "View All Users";
@@ -25,8 +27,10 @@
             <td>@user.FirstName </td>
             <td>@user.LastName </td>
             <td>@user.Email </td>
-            <td> <a asp-action="ViewUser" asp-route-id="@user.Id">View User</a> </td>
+            <td> <a asp-action="ViewUserBooks" asp-route-id="@user.Id">View User</a> </td>
         </tr>
     }
     
 </table>
+</br>
+@Html.PagedListPager(Model , page => Url.Action("ViewAllUsers", new { page }))

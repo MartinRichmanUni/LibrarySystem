@@ -19,6 +19,6 @@ public class RegisterViewModel
 
     [DataType(DataType.Password)]
     [Display(Name ="Confirm Password")]
-    [Compare("Password",ErrorMessage ="Password and confirmation password not match.")]
+    [Compare("Password",ErrorMessage ="Password and confirmation password don't match.")]
     public string ConfirmPassword { get; set; }
 }

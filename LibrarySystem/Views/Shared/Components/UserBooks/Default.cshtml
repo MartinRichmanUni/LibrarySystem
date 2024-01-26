@@ -1,4 +1,6 @@
-@model IEnumerable<LibrarySystem.Models.UserBooks>
+@model PagedList<LibrarySystem.Models.UserBooks>
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
 
 @{
     ViewData["Title"] = "User's Books";
@@ -6,7 +8,7 @@
     Layout = "_Layout";
 }
 
-<form asp-action="ViewUser">
+<form asp-action="ViewUserBooks">
     <select name="status">
         <option value="">All</option>
         <option value="Returned">Returned</option>
@@ -18,9 +20,9 @@
 
 <table class="table">
     <tr>
-        <th> @Html.ActionLink("Book Title", "ViewUser", new {sortOrder = ViewBag.TitleSort, currentFilter = ViewBag.CurrentFilter}) </th>
-        <th> @Html.ActionLink("Genre", "ViewUser", new {sortOrder = ViewBag.TitleSort, currentFilter = ViewBag.CurrentFilter}) </th>
-        <th> @Html.ActionLink("Author", "ViewUser", new {sortOrder = ViewBag.TitleSort, currentFilter = ViewBag.CurrentFilter}) </th>
+        <th> @Html.ActionLink("Book Title", "ViewUserBooks", new {sortOrder = ViewBag.TitleSort, currentFilter = ViewBag.CurrentFilter}) </th>
+        <th> @Html.ActionLink("Genre", "ViewUserBooks", new {sortOrder = ViewBag.TitleSort, currentFilter = ViewBag.CurrentFilter}) </th>
+        <th> @Html.ActionLink("Author", "ViewUserBooks", new {sortOrder = ViewBag.TitleSort, currentFilter = ViewBag.CurrentFilter}) </th>
         <th> Borrowed Date </th>
         <th> Due Date</th>
         <th> Returned Date </th>
@@ -49,10 +51,12 @@
                 {
                     <td> Pending </td>
                 }
-                @if (borrowed.ReturnedDate == null)
+                @if (borrowed.ReturnedDate == null && User.IsInRole("Admin"))
                 {
                     <td> @Html.ActionLink("Return Book", "ReturnBook", new { userID = borrowed.MemberID, bookID = borrowed.BookID })</td>
                 }
             </tr>
         } 
 </table>
+</br>
+@Html.PagedListPager(Model, page => Url.Action("ViewUserBooks", new {page}))

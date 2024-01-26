@@ -76,10 +76,10 @@ public class AdminController : Controller
             users = users.Where(u => u.FirstName.Contains(searchResult));
         }
 
-        return View(users);
+        return View(users.ToPagedList(pageNumber, pageSize));
     }
 
-    public IActionResult ViewUser(string id, string searchResult, string sortOrder, string currentFilter, int? page, string status)
+    public IActionResult ViewUserBooks(string id, string searchResult, string sortOrder, string currentFilter, int? page, string status)
     {
 
         return ViewComponent("UserBooks",
@@ -169,7 +169,6 @@ public class AdminController : Controller
                         where Borrowed.MemberID == userID && Borrowed.BookID == bookID
                         select new UserBooks
                         {
-                            BookID = Borrowed.BookID,
                             BookTitle = Book.BookTitle,
                             Genre = Book.Genre,
                             Author = Book.Author,

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using LibrarySystem.Context;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace LibrarySystem.Controllers;
 
@@ -99,5 +100,24 @@ public IActionResult Register()
         var user = await _userManager.GetUserAsync(User);
 
         return View(user);
+    }
+
+    public async Task<IActionResult> ChangeEmail()
+    {
+        var user = await _userManager.GetUserAsync(User);
+
+        return View(user);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> ChangeEmail(string email)
+    {
+        var user = await _userManager.GetUserAsync(User);
+            user.Email = email;
+            user.UserName = email;
+
+            await _userManager.UpdateAsync(user);
+
+            return RedirectToAction("ViewProfile");
     }
 }

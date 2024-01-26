@@ -30,13 +30,7 @@
     <p> Current Date </p>
     <p> @DateOnly.FromDateTime(DateTime.Now)</p>
 </div>
-<div>
-    @if (Model.DueDate < DateOnly.FromDateTime(DateTime.Now))
-    {
-        <p> Book is Overdue, requires payment before proceeding.</p>
-        <h2> Payment Details </h2>
-    }
-</div>
+
 <form asp-action="ReturnBook" method="post">
     <input type="hidden" asp-for="MemberID">
     <input type="hidden" asp-for="BookID">

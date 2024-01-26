@@ -4,13 +4,33 @@
     ViewData["Title"] = "User Profile";
 }
 
-<h1> User Profile </h1>
-
 <div>
+    <h1> User Profile </h1>
+    <div>
     @Html.DisplayNameFor(Model => Model.FirstName) <br />
     @Html.DisplayFor(Model => Model.FirstName)
+    </div>
+    <div>
+        @Html.DisplayNameFor(Model => Model.LastName) <br />
+        @Html.DisplayFor(Model => Model.LastName)
+    </div>
+    <div>
+        @Html.DisplayNameFor(Model => Model.Email) <br />
+        @Html.DisplayFor(Model => Model.Email)
+        <a asp-action="ChangeEmail"> Change Email </a>
+    </div>
+    <div>
+        <a> Change Email </a>
+        <a> Change Password </a>
+    </div>
 </div>
 <div>
-    @Html.DisplayNameFor(Model => Model.LastName) <br />
-    @Html.DisplayFor(Model => Model.LastName)
+    <h1> User Address </h1>
+    <div>
+        Address details placeholder <br />
+        Address details placeholder <br />
+        Address details placeholder <br />
+        Address details placeholder <br />
+        <a> Update Address </a>
+    </div>
 </div>

@@ -1,7 +1,10 @@
-
 Add Customer Page to show a list of all customers, further view to display books user has borrowed and any outstanding.
-Look at ways to store multiple genres for a single book
-Look at secure payment methods etc. 
 Add return book functionality for admin
-In user books, provide filters for all books, unreturned books and returned books
 Add a profile page for users
+Modify User Books to allow users to view their books borrowed.
+
+** OPTIONAL **
+
+Look at ways to store multiple genres for a single book
+Look at secure payment methods etc.
+Look at having a verified email, can be used for resetting password with email confirmation

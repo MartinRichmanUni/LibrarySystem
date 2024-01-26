@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LibrarySystem.Context;
 using LibrarySystem.Models;
+using X.PagedList;
 
 namespace LibrarySystem.ViewComponents;
 
@@ -41,12 +42,14 @@ public class UserBooksViewComponent : ViewComponent
                         where Borrowed.MemberID == id
                         select new UserBooks
                         {
+                            BookID = Book.BookID,
                             BookTitle = Book.BookTitle,
                             Genre = Book.Genre,
                             Author = Book.Author,
                             BorrowedDate = Borrowed.BorrowedDate,
                             DueDate = Borrowed.DueDate,
                             ReturnedDate = Borrowed.ReturnedDate,
+                            MemberID = Borrowed.MemberID
                         };
 
         switch(sortOrder)
@@ -71,6 +74,8 @@ public class UserBooksViewComponent : ViewComponent
                 break;  
         }
         
+        int pageSize = 2;
+        int pageNumber = (page ?? 1);
         if (!String.IsNullOrEmpty(searchResult))
         {
             userBooks = userBooks.Where(u => u.BookTitle!.Contains(searchResult));
@@ -84,7 +89,7 @@ public class UserBooksViewComponent : ViewComponent
         {
             userBooks = userBooks.Where(u => u.ReturnedDate == null);
         }
-        return View(userBooks);
+        return View(userBooks.ToPagedList(pageNumber, pageSize));
     }
 
 
