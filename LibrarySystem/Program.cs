@@ -24,7 +24,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.S
 builder.Services.AddTransient<IEmailSender, SendGridEmailSender>();
 builder.Services.Configure<SendGridEmailSenderOptions>(options =>
 {
-    options.SendGridKey = builder.Configuration["ExternalProviders:SendGrid:ApiKey"];
+    options.SendGridKey = builder.Configuration["SendGridKey"];
     options.SenderEmail = builder.Configuration["ExternalProviders:SendGrid:SenderEmail"]; 
     options.SenderName = builder.Configuration["ExternalProviders:SendGrid:SenderName"];
 });
