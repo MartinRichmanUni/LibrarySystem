@@ -1,0 +1,21 @@
+@model LibrarySystem.Context.ApplicationUser
+@{
+    ViewData["Title"] = "Change Password";
+}
+
+<h1> Change Password</h1>
+
+<h3> Please enter the email address associated with this account.</h3>
+<h3> If it matches, a reset link will be sent, which when clicked will allow you to change the password.</h3>
+
+<div>
+    @Html.DisplayFor(Model => Model.Email)
+</div>
+<form action="CheckEmail" method="post"> 
+    <div>
+        Please Enter your email address <br />
+        <input name="email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <button type="submit"> Send Link</button>
+</form>

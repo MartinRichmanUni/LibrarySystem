@@ -4,8 +4,12 @@ using LibrarySystem.Models;
 using Microsoft.AspNetCore.Identity;
 using LibrarySystem.Context;
 using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+
+using SendGrid;
+using SendGrid.Helpers.Mail;
+using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace LibrarySystem.Controllers;
 
@@ -14,11 +18,15 @@ public class AccountController : Controller
 private readonly UserManager<ApplicationUser> _userManager;
 private readonly SignInManager<ApplicationUser> _signInManager;
 
+private readonly IEmailSender _emailSender;
+
 public AccountController(UserManager<ApplicationUser> userManager,
-                              SignInManager<ApplicationUser> signInManager)
+                              SignInManager<ApplicationUser> signInManager,
+                              IEmailSender emailSender)
     {
             _userManager = userManager;
             _signInManager = signInManager;
+            _emailSender = emailSender;
     }
 
     // Code tutorial used : https://www.freecodespot.com/blog/asp-net-core-identity/
@@ -109,6 +117,7 @@ public IActionResult Register()
         return View(user);
     }
 
+    /** Look at correct validation methods for ensuring email is valid **/
     [HttpPost]
     public async Task<IActionResult> ChangeEmail(string email)
     {
@@ -120,4 +129,54 @@ public IActionResult Register()
 
             return RedirectToAction("ViewProfile");
     }
+
+    public IActionResult CheckEmail()
+    {
+        return View();
+    }
+
+    /**
+        NOTE: This function includes temporary data for testing. 
+        A better option would be to use a template provided by SendGrid, or to create one.
+        The link is a localhost and within a real world environment, the real web address should be used.
+    **/
+    [HttpPost]
+    public async Task<IActionResult> CheckEmail(string email)
+    {
+        var user = await _userManager.GetUserAsync(User);
+        string subject = "Password Reset for Library Management System";
+        string body = "This is a password reset, please click <a href='http://localhost:5027/Account/ChangePassword'>here<a> to open the link to reset the password associated with your account.";
+
+        if (user.Email == email)
+        {
+            await _emailSender.SendEmailAsync(user.Email, subject, body);
+        }
+
+        return RedirectToAction("ViewProfile");
+    }
+
+    public IActionResult ChangePassword()
+    {
+        return View();
+    }
+
+    /** Look at validation for password to ensure it matches the minimum requirements set out **/
+    /**
+        Toke provider for password does not work, need to figure out a solution
+    [HttpPost]
+    public async Task<IActionResult> ChangePassword(string password)
+    {
+        var user = await _userManager.GetUserAsync(User);
+        var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+        var result = await _userManager.ResetPasswordAsync(user, token, password);
+
+        if (!result.Succeeded)
+        {
+            ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
+            return View();
+        }
+
+        return RedirectToAction("Index", "Home");
+    }
+    **/
 }

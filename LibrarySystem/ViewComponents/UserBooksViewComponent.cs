@@ -74,7 +74,7 @@ public class UserBooksViewComponent : ViewComponent
                 break;  
         }
         
-        int pageSize = 2;
+        int pageSize = 10;
         int pageNumber = (page ?? 1);
         if (!String.IsNullOrEmpty(searchResult))
         {

@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using LibrarySystem.Context;
+using LibrarySystem;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,15 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
 .AddEntityFrameworkStores<AppDbContext>();
+
+
+builder.Services.AddTransient<IEmailSender, SendGridEmailSender>();
+builder.Services.Configure<SendGridEmailSenderOptions>(options =>
+{
+    options.SendGridKey = builder.Configuration["ExternalProviders:SendGrid:ApiKey"];
+    options.SenderEmail = builder.Configuration["ExternalProviders:SendGrid:SenderEmail"]; 
+    options.SenderName = builder.Configuration["ExternalProviders:SendGrid:SenderName"];
+});
 
 var app = builder.Build();
 
@@ -75,5 +86,6 @@ using (var scope = app.Services.CreateScope())
         await userManager.AddToRoleAsync(user, "Admin");
     }
 }
+
 
 app.Run();
